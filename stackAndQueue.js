@@ -27,6 +27,18 @@ class StackList {
   peek() {
     return this.head ? this.head.data : null;
   }
+  read() {
+    if (!this.length) return "This stack is empty.";
+    let retStr = `This stack contains ${
+      this.length
+    } items in order of removal:`;
+    let pointer = this.head;
+    while (pointer) {
+      retStr = retStr.concat(` \n${pointer.data}`);
+      pointer = pointer.next;
+    }
+    return retStr;
+  }
 }
 
 class QueueList {
@@ -54,6 +66,20 @@ class QueueList {
   }
   peek() {
     return this.tail ? this.tail.next.data : null;
+  }
+  read() {
+    if (!this.length) return "This queue is empty.";
+    let retStr = `This queue contains ${
+      this.length
+    } items in order of removal:`;
+    let pointer = this.tail.next;
+    let count = this.length;
+    while (count) {
+      retStr = retStr.concat(`\n${pointer.data}`);
+      pointer = pointer.next;
+      count--;
+    }
+    return retStr;
   }
 }
 
