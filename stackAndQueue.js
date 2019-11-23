@@ -29,7 +29,7 @@ class StackList {
   }
   read() {
     if (!this.length) return "This stack is empty.";
-    let retStr = `This stack contains ${
+    let retStr = `This stack contains the following ${
       this.length
     } items in order of removal:`;
     let pointer = this.head;
@@ -69,7 +69,7 @@ class QueueList {
   }
   read() {
     if (!this.length) return "This queue is empty.";
-    let retStr = `This queue contains ${
+    let retStr = `This queue contains the following ${
       this.length
     } items in order of removal:`;
     let pointer = this.tail.next;
