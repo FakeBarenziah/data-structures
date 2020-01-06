@@ -37,3 +37,16 @@ myListWithOneNode.show()
 
 myListWithOneNode.deleteNode(0)
 myListWithOneNode.show()
+
+
+const myCircularList = new List()
+myCircularList.insert(10)
+myCircularList.insert(9)
+myCircularList.insert(8)
+myCircularList.insert(7)
+myCircularList.insert(6)
+
+myCircularList.get(myCircularList.length-1).next = myCircularList.get(1)
+
+console.log(`myList circular?  ${myList.circular()}`)
+console.log(`myCircularList circular? ${myCircularList.circular()}`)

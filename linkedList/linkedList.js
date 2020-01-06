@@ -98,6 +98,9 @@ class List {
 		this.head = reversedList
 		return this
 	}
+	circular(){
+		return !!this.get(this.length-1).next
+	}
 }
 module.exports = List
 
