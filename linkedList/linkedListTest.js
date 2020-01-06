@@ -11,12 +11,12 @@ myList.insert(1)
 
 myList.show()
 
-myList.deleteNode(0)
+myList.reverse()
 myList.show()
 
 
 myListWithOneNode.insert(1)
 
 myListWithOneNode.show()
-myListWithOneNode.deleteNode(0)
+myListWithOneNode.reverse()
 myListWithOneNode.show()

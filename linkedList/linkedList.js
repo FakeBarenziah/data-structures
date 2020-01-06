@@ -86,6 +86,18 @@ class List {
 		this.length--
 		return this
 	}
+	reverse(){
+		let node = this.head
+		let reversedList = null
+		while(node){
+			let origList = node.next
+			node.next = reversedList
+			reversedList = node
+			node = origList
+		}
+		this.head = reversedList
+		return this
+	}
 }
 module.exports = List
 
