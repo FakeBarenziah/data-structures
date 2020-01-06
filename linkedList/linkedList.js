@@ -67,6 +67,25 @@ class List {
 		this.get(id).value = value
 		return true
 	}
+	deleteNode(id){
+		id = Math.floor(id)
+		if (id < 0 || id > this.length - 1){
+			return this
+		}
+		if (id === 0) {
+			this.head = this.head.next
+			return this
+		}
+		let count = 0
+		let pointer = this.head
+		while (count < id - 1){
+			pointer = pointer.next
+			count++
+		}
+		pointer.next = pointer.next.next
+		this.length--
+		return this
+	}
 }
 module.exports = List
 
