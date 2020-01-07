@@ -99,7 +99,17 @@ class List {
 		return this
 	}
 	circular(){
-		return !!this.get(this.length-1).next
+		let fast = this.head
+		let slow = this.head
+
+		while(fast.next || slow.next){
+			if(slow.next) slow = slow.next; else return false
+
+			if(fast.next) fast = fast.next; else return false
+			if(fast.next) fast = fast.next; else return false
+
+			if(fast === slow) return true
+		}
 	}
 }
 module.exports = List
