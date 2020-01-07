@@ -34,19 +34,18 @@ class List {
 	pop(){
 		if(this.length === 0) return null
 		let currentNode = this.head
-		if(this.length === 1){
+		this.length--
+		if(this.length === 0){
 			this.head = null
-			this.length--
 			return currentNode
 		}
 		let count = 0
-		while(count < this.length - 2){
+		while(count < this.length - 1){
 			currentNode = currentNode.next
 			count++
 		}
 		const lastNode = currentNode.next
 		currentNode.next = null
-		this.length--
 		return lastNode
 	}
 	get(id){
@@ -72,6 +71,7 @@ class List {
 		if (id < 0 || id > this.length - 1){
 			return this
 		}
+		this.length--
 		if (id === 0) {
 			this.head = this.head.next
 			return this
@@ -83,7 +83,6 @@ class List {
 			count++
 		}
 		pointer.next = pointer.next.next
-		this.length--
 		return this
 	}
 	reverse(){
