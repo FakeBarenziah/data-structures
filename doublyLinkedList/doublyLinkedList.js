@@ -40,15 +40,19 @@ class DoublyLinkedList {
 	}
 	show(){
 		if(this.length === 0) return null
-		let counter = 0
+		let circular = false
 		let activeNode = this.head
 		let listStatement = ""
-		while(counter < this.length){
+		while(activeNode !== null){
 			listStatement += `${activeNode.value} -> `
 			activeNode = activeNode.next
-			counter++
+			if(activeNode === this.head) {
+				circular = true
+				break
+			}
 		}
-		return listStatement += "null"
+		if(circular) listStatement += "null"
+		return listStatement
 	}
 	shift(){
 		if(!this.head) return null
@@ -105,6 +109,13 @@ class DoublyLinkedList {
 			indexCount++
 		}
 		return accessPoint
+	}
+	delete(idx){
+		const doomedNode = this.getAtIndex(idx)
+		if(doomedNode.prev) doomedNode.prev.next = doomedNode.next
+		if(doomedNode.next) doomedNode.next.prev = doomedNode.prev
+		this.length--
+		return this
 	}
 }
 
