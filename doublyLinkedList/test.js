@@ -2,13 +2,13 @@ const DoublyLinkedList = require('./doublyLinkedList.js')
 
 const myList = new DoublyLinkedList()
 
-console.assert(myList.length === 0)
 myList.push(10)
-console.assert(myList.length === 1)
 
-console.assert(myList.head === myList.tail)
+console.log("Nodes head and tail match when one node is in the list: ", myList.head === myList.tail)
 
-console.log(myList.pop().value, myList.head, myList.tail)
+console.log("pop returns the element in a list with length of 1: ", myList.pop().value === 10)
+
+console.log("List has null head and tail after removing its only node: ", myList.head===null && myList.tail===null)
 
 const list = new DoublyLinkedList()
 
@@ -16,9 +16,9 @@ const pushVals = [4,8,6,7,9,5,3,1,6,3]
 
 pushVals.forEach(each => list.push(each))
 
-console.log(list.tail.value, list.pop().value, list.length)
-console.log(list.tail.value, list.pop().value, list.length)
-console.log(list.tail.value)
+console.log("pop returns the last element in a list with multiple elements: ", list.tail.value === list.pop().value)
+console.log("tail element is different than it was before: ", list.tail.value !== 3)
+console.log("Length is reduced after popping: ", list.length < 10)
 
 console.log(list.show())
 const listLengthLine24 = list.length
@@ -38,6 +38,10 @@ console.assert(list.length === 10)
 
 console.log(list.show())
 console.log("insertAtIndex increases the length: ", list.insertAtIndex(3, 1000).length === 11)
-console.log(list.show())
-
 console.log("getAtIndex gets the correct node: ", list.getAtIndex(3).value === 1000)
+
+console.log(list.show())
+list.delete(3)
+console.log("delete decreases the length properly: ", list.length === 10)
+console.log("delete removes an element by index position: ", list.getAtIndex(3).value !== 1000)
+console.log(list.show())
