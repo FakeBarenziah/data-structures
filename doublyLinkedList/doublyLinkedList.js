@@ -111,9 +111,10 @@ class DoublyLinkedList {
 		return accessPoint
 	}
 	delete(idx){
-		const doomedNode = this.getAtIndex(idx)
-		if(doomedNode.prev) doomedNode.prev.next = doomedNode.next
-		if(doomedNode.next) doomedNode.next.prev = doomedNode.prev
+		const prevNode = this.getAtIndex(idx-1)
+		const nextNode = this.getAtIndex(idx+1)
+		if(prevNode) prevNode.next = nextNode
+		if(nextNode) nextNode.prev = prevNode
 		this.length--
 		return this
 	}
