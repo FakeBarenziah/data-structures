@@ -26,19 +26,17 @@ class DoublyLinkedList {
 		return this
 	}
 	pop(){
-		if(!this.head) return null
-		let removeNode = null
+		if(!this.tail) return null
+		const removeNode = this.tail
 		if(this.head === this.tail && this.length === 1){
-			removeNode = this.head
 			this.head = null
 			this.tail = null
 		}else{
-			removeNode = this.tail
 			this.tail = removeNode.prev
 			this.tail.next = null
 		}
 		this.length--
-		return removeNode.value
+		return removeNode
 	}
 	show(){
 		if(this.length === 0) return null
@@ -54,7 +52,7 @@ class DoublyLinkedList {
 	}
 	shift(){
 		if(!this.head) return null
-		const returnVal = this.head.value
+		const returnVal = this.head
 		if(this.head === this.tail && this.length === 1){
 			this.head = null
 			this.tail = null
@@ -77,6 +75,36 @@ class DoublyLinkedList {
 		}
 		this.length++
 		return this
+	}
+	clear(){
+		this.head = this.tail = null
+		this.length = 0
+		return this
+	}
+	insertAtIndex(idx, value){
+		const newNode = new Node(value)
+		let indexCount = 0
+		let insertionPoint = this.head
+		while(indexCount < idx){
+			insertionPoint = insertionPoint.next
+			indexCount++
+		}
+		if(insertionPoint.prev) insertionPoint.prev.next = newNode
+		newNode.next = insertionPoint
+		insertionPoint.prev = newNode
+		newNode.prev = insertionPoint.prev
+
+		this.length++
+		return this
+	}
+	getAtIndex(idx){
+		let indexCount = 0
+		let accessPoint = this.head
+		while(indexCount < idx){
+			accessPoint = accessPoint.next
+			indexCount++
+		}
+		return accessPoint
 	}
 }
 
