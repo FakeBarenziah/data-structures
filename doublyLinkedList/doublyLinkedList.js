@@ -12,6 +12,9 @@ class DoublyLinkedList {
 		this.tail = null
 		this.length = 0
 	}
+	notAllNodesShownError(){
+		console.error("Not all nodes are shown. Has length been improperly modified?")
+	}
 	push(value){
 		const newNode = new Node(value)
 		if(!this.head) {
@@ -48,7 +51,7 @@ class DoublyLinkedList {
 			activeNode = activeNode.next
 			counter++
 		}
-		if(activeNode && !this.loop()) throw new Error("Not all nodes are shown. Has length been improrperly modified?")
+		if(activeNode && !this.loop()) this.notAllNodesShownError()
 		listStatement += this.loop() ? "circular" : "null"
 		return listStatement
 	}
@@ -148,8 +151,8 @@ class DoublyLinkedList {
 			if(fast === slow) return true
 		}
 	}
-	search(value){
-		let currentNode = this.head
+	search(value, idx=0){
+		let currentNode = this.getAtIndex(idx)
 		let counter = 0
 		while(counter < this.length){
 			if(currentNode.value === value) return currentNode

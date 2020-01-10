@@ -37,6 +37,12 @@ console.log("shift reduces the length: ", list.length === listLengthBeforeShift 
 list.unshift(22)
 console.log("unshift adds a value to the head: ", list.head.value === 22)
 console.log("unshift increases the length ", list.length === listLengthBeforeShift)
+console.log("\n Shift the list with one item: ")
+list.clear()
+list.push(3)
+console.log("shift still works when it empties the list: ", list.shift().value === 3)
+console.log("Length is now 0, and head and tail are null: ", list.length === 0, list.head === null, list.tail === null)
+console.log("Shifting from an empty list returns null without throwing errors: ", list.shift() === null)
 
 console.log("\n Clear: \n")
 list.clear()
@@ -66,6 +72,13 @@ console.log(list.show())
 console.log("Passing an invalid index to delete does not change the length or list: ", list.delete(-2).length === 10)
 console.log(list.show())
 
+seedList(list)
+
+console.log("\n Error Handling when length is modified improperly \n")
+list.length--
+console.log(list.show())
+list.length++
+
 console.log("\n Circularity: \n")
 list.makeCircular()
 console.log(list.show())
@@ -79,4 +92,5 @@ console.log("\n Search: \n")
 seedList(list)
 
 console.log("Finds the first instance of a node with the given value, starting from the head: ", list.search(1) === list.getAtIndex(7))
+console.log("If passed a second argument, the search starts at that index: ", list.search(6, 5) === list.getAtIndex(8))
 console.log("Returns null for values not in the list: ", list.search(-1) === null)
