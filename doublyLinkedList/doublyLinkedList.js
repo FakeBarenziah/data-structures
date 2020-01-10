@@ -39,19 +39,17 @@ class DoublyLinkedList {
 		return removeNode
 	}
 	show(){
-		if(this.length === 0) return null
-		let circular = false
+		if(!this.head) return null
+		let counter = 0
 		let activeNode = this.head
 		let listStatement = ""
-		while(activeNode !== null){
+		while(counter < this.length){
 			listStatement += `${activeNode.value} -> `
 			activeNode = activeNode.next
-			if(activeNode === this.head) {
-				circular = true
-				break
-			}
+			counter++
 		}
-		if(circular) listStatement += "null"
+		if(activeNode && !this.loop()) throw new Error("Not all nodes are shown. Has length been improrperly modified?")
+		listStatement += this.loop() ? "circular" : "null"
 		return listStatement
 	}
 	shift(){
@@ -117,6 +115,28 @@ class DoublyLinkedList {
 		if(nextNode) nextNode.prev = prevNode
 		this.length--
 		return this
+	}
+	makeCircular(){
+		this.head.prev = this.tail
+		this.tail.next = this.head
+		return this
+	}
+	breakCircular(){
+		this.head.prev = null
+		this.tail.next = null
+		return this
+	}
+	loop(){
+		let fast = this.head
+		let slow = this.head
+		while(fast.next || slow.next){
+			if(slow.next) slow = slow.next; else return false
+
+			if(fast.next) fast = fast.next; else return false
+			if(fast.next) fast = fast.next; else return false
+
+			if(fast === slow) return true
+		}
 	}
 }
 
