@@ -278,6 +278,26 @@ class DoublyLinkedList {
 
 		return newList
 	}
+	reduce(func, init){
+		const newList = new DoublyLinkedList()
+
+		let currentNode = this.head
+		let counter = 0
+
+		if(init === undefined){
+			init = currentNode.value
+			currentNode = currentNode.next
+			counter++
+		}
+
+		while(counter < this.length){
+			init = func(currentNode.value, init)
+			currentNode = currentNode.next
+			counter++
+		}
+
+		return init
+	}
 }
 
 module.exports = DoublyLinkedList

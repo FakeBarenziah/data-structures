@@ -213,3 +213,23 @@ console.log("Filter returns a circular list if called on one: ", greaterList.tai
 console.log("Filtered circluar list is of correct length: ", greaterList.length === 5)
 console.log("Filter works on a circular list: ", greaterList.getAtIndex(0).value === 8, greaterList.getAtIndex(4).value === 6)
 console.log(greaterList.show())
+
+console.log("\n Reduce \n")
+
+list.breakCircular()
+
+const sumOfValues = list.reduce((e, acc) => e + acc)
+
+console.log("Reduce does not modify the list it is called on: ", originalThirdValue === list.getAtIndex(3).value)
+console.log("Reduce applies the callback function to each list element, combining them into one value: ", sumOfValues === 52)
+
+const strCb = (each, acc) => acc += each.toString()
+
+console.log("Reduce works without the optional initial value: ", list.reduce(strCb) === "4867953163")
+
+list.makeCircular()
+
+const multiplier = (each, acc) => each * acc
+const bigNum = list.reduce(multiplier)
+
+console.log("Reduce works correctly when the list is circular: ", bigNum === 3265920)
