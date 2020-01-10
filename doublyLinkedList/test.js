@@ -53,12 +53,17 @@ console.log("insertAtIndex increases the length: ", list.insertAtIndex(3, 1000).
 console.log("getAtIndex gets the correct node: ", list.getAtIndex(3).value === 1000)
 console.log(list.show())
 
+console.log("Passing an invalid index does not incorrectly change the length or list: ", list.insertAtIndex(500, 50).length === 11)
+console.log("Decimals passed as indices are rounded down: ", list.getAtIndex(6.8) === list.getAtIndex(6))
+
 console.log("\n Delete: \n")
 
 console.log(list.show())
 list.delete(3)
 console.log("delete decreases the length properly: ", list.length === 10)
 console.log("delete removes an element by index position: ", list.getAtIndex(3).value !== 1000)
+console.log(list.show())
+console.log("Passing an invalid index to delete does not change the length or list: ", list.delete(-2).length === 10)
 console.log(list.show())
 
 console.log("\n Circularity: \n")

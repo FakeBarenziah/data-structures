@@ -52,6 +52,11 @@ class DoublyLinkedList {
 		listStatement += this.loop() ? "circular" : "null"
 		return listStatement
 	}
+	indexValid(idx){
+		idx = Math.floor(idx)
+		if(idx < 0 || idx > this.length - 1) return false
+		return idx
+	}
 	shift(){
 		if(!this.head) return null
 		const returnVal = this.head
@@ -84,6 +89,8 @@ class DoublyLinkedList {
 		return this
 	}
 	insertAtIndex(idx, value){
+		idx = this.indexValid(idx)
+		if(idx === false) return this
 		const newNode = new Node(value)
 		let indexCount = 0
 		let insertionPoint = this.head
@@ -100,6 +107,8 @@ class DoublyLinkedList {
 		return this
 	}
 	getAtIndex(idx){
+		idx = this.indexValid(idx)
+		if(idx === false) return null
 		let indexCount = 0
 		let accessPoint = this.head
 		while(indexCount < idx){
@@ -109,8 +118,9 @@ class DoublyLinkedList {
 		return accessPoint
 	}
 	delete(idx){
-		const prevNode = this.getAtIndex(idx-1)
-		const nextNode = this.getAtIndex(idx+1)
+		if(this.indexValid(idx) === false) return this
+		const prevNode = this.getAtIndex(idx - 1)
+		const nextNode = this.getAtIndex(idx + 1)
 		if(prevNode) prevNode.next = nextNode
 		if(nextNode) nextNode.prev = prevNode
 		this.length--
