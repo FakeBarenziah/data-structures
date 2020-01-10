@@ -175,8 +175,9 @@ const afterReversingCircularList = list.reverse().show(true)
 
 console.log("Correctly reverses a circular list: ", beforeReversingCircularList === afterReversingCircularList)
 
-console.log("\n Map \n")
 seedList(list)
+
+console.log("\n Map \n")
 
 const originalThirdValue = list.getAtIndex(3).value
 
@@ -193,3 +194,22 @@ const tripledList = list.map(e => e*3)
 console.log("Map works on a circluar list: ", tripledList.getAtIndex(0).value === list.getAtIndex(0).value * 3, tripledList.getAtIndex(6).value === list.getAtIndex(6).value * 3, tripledList.getAtIndex(list.length - 1).value === list.getAtIndex(list.length - 1).value * 3)
 console.log("Map returns a circular list if called on one: ", tripledList.tail.next === tripledList.head, tripledList.head.prev === tripledList.tail)
 console.log("New circular list has the correct length: ", list.length === tripledList.length)
+
+console.log("\n Filter \n")
+
+list.breakCircular()
+
+const listOfEvens = list.filter(e => e%2 === 0)
+
+console.log("Filter does not modify the list it is called on: ", originalThirdValue === list.getAtIndex(3).value)
+console.log("Filter adds only list elements that return true when passed to the callback function: ", listOfEvens.getAtIndex(0).value === 4, listOfEvens.getAtIndex(3).value === 6)
+console.log("Filter returns a list of a different length as appropriate: ", listOfEvens.length === 4)
+console.log(listOfEvens.show())
+
+list.makeCircular()
+const greaterList = list.filter(e => e > 5)
+
+console.log("Filter returns a circular list if called on one: ", greaterList.tail.next === greaterList.head, greaterList.head.prev === greaterList.tail)
+console.log("Filtered circluar list is of correct length: ", greaterList.length === 5)
+console.log("Filter works on a circular list: ", greaterList.getAtIndex(0).value === 8, greaterList.getAtIndex(4).value === 6)
+console.log(greaterList.show())
