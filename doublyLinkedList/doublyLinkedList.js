@@ -25,12 +25,15 @@ class DoublyLinkedList {
 			newNode.prev = this.tail
 			this.tail = newNode
 		}
+
 		this.length++
 		return this
 	}
 	pop(){
 		if(!this.tail) return null
+
 		const removeNode = this.tail
+
 		if(this.head === this.tail && this.length === 1){
 			this.head = null
 			this.tail = null
@@ -38,20 +41,25 @@ class DoublyLinkedList {
 			this.tail = removeNode.prev
 			this.tail.next = null
 		}
+
 		this.length--
 		return removeNode
 	}
 	show(){
 		if(!this.head) return null
+
 		let counter = 0
 		let activeNode = this.head
 		let listStatement = ""
+
 		while(counter < this.length){
 			listStatement += `${activeNode.value} -> `
 			activeNode = activeNode.next
 			counter++
 		}
+
 		if(activeNode && !this.loop()) this.notAllNodesShownError()
+
 		listStatement += this.loop() ? "circular" : "null"
 		return listStatement
 	}
@@ -62,7 +70,9 @@ class DoublyLinkedList {
 	}
 	shift(){
 		if(!this.head) return null
+
 		const returnVal = this.head
+
 		if(this.head === this.tail && this.length === 1){
 			this.head = null
 			this.tail = null
@@ -70,11 +80,13 @@ class DoublyLinkedList {
 			this.head = this.head.next
 			this.head.prev = null
 		}
+
 		this.length--
 		return returnVal
 	}
 	unshift(value){
 		const newNode = new Node(value)
+
 		if(!this.head){
 			this.head = newNode
 			this.tail = newNode
@@ -83,6 +95,7 @@ class DoublyLinkedList {
 			newNode.next = this.head
 			this.head = newNode
 		}
+
 		this.length++
 		return this
 	}
@@ -94,13 +107,10 @@ class DoublyLinkedList {
 	insertAtIndex(idx, value){
 		idx = this.indexValid(idx)
 		if(idx === false) return this
+
 		const newNode = new Node(value)
-		let indexCount = 0
-		let insertionPoint = this.head
-		while(indexCount < idx){
-			insertionPoint = insertionPoint.next
-			indexCount++
-		}
+		const insertionPoint = this.getAtIndex(idx)
+
 		if(insertionPoint.prev) insertionPoint.prev.next = newNode
 		newNode.next = insertionPoint
 		insertionPoint.prev = newNode
@@ -112,20 +122,25 @@ class DoublyLinkedList {
 	getAtIndex(idx){
 		idx = this.indexValid(idx)
 		if(idx === false) return null
+
 		let indexCount = 0
 		let accessPoint = this.head
 		while(indexCount < idx){
 			accessPoint = accessPoint.next
 			indexCount++
 		}
+
 		return accessPoint
 	}
 	delete(idx){
 		if(this.indexValid(idx) === false) return this
+
 		const prevNode = this.getAtIndex(idx - 1)
 		const nextNode = this.getAtIndex(idx + 1)
+
 		if(prevNode) prevNode.next = nextNode
 		if(nextNode) nextNode.prev = prevNode
+
 		this.length--
 		return this
 	}
@@ -154,12 +169,38 @@ class DoublyLinkedList {
 	search(value, idx=0){
 		let currentNode = this.getAtIndex(idx)
 		let counter = 0
+
 		while(counter < this.length){
 			if(currentNode.value === value) return currentNode
 			currentNode = currentNode.next
 			counter++
 		}
+
 		return currentNode
+	}
+	insertBefore(value, node){
+		if(!node) return this
+		const newNode = new Node(value)
+
+		if(node.prev) node.prev.next = newNode
+		newNode.next = node
+		newNode.prev = node.prev
+		node.prev = newNode
+
+		this.length++
+		return this
+	}
+	insertAfter(value, node){
+		if(!node) return this
+		const newNode = new Node(value)
+
+		if(node.next) node.next.prev = newNode
+		newNode.prev = node
+		newNode.next = node.next
+		node.next = newNode
+
+		this.length++
+		return this
 	}
 }
 

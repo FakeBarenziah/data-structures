@@ -94,3 +94,28 @@ seedList(list)
 console.log("Finds the first instance of a node with the given value, starting from the head: ", list.search(1) === list.getAtIndex(7))
 console.log("If passed a second argument, the search starts at that index: ", list.search(6, 5) === list.getAtIndex(8))
 console.log("Returns null for values not in the list: ", list.search(-1) === null)
+
+console.log("\n Insert Before and After: \n")
+
+console.log(list.show())
+const nodeA = list.getAtIndex(5)
+const nodeB = nodeA.next
+list.insertAfter(8, nodeA)
+const nodeC = list.getAtIndex(6)
+console.log(list.show())
+
+console.log("insertAfter inserts a node with a value after the passed node: ", nodeA.next.value === 8, nodeB.prev.value === 8)
+console.log("insertAfter increases the length correctly: ", list.length === 11)
+console.log("Nodes A -> C -> B next pointers are correct: ", nodeA.next === nodeC, nodeC.next === nodeB)
+console.log("Nodes B -> C -> A prev pointers are correct: ", nodeB.prev === nodeC, nodeC.prev === nodeA)
+
+const nodeF = list.getAtIndex(8)
+const nodeD = nodeF.prev
+list.insertBefore(19, nodeF)
+const nodeE = list.getAtIndex(8)
+console.log(list.show())
+
+console.log("insertBefore inserts a node with a value before the passed node: ", nodeD.next.value === 19, nodeF.prev.value === 19)
+console.log("insertBefore increases the length correctly: ", list.length === 12)
+console.log("Nodes' next pointers are correct: ", nodeD.next === nodeE, nodeE.next === nodeF)
+console.log("Nodes' prev pointers are correct: ", nodeF.prev === nodeE, nodeE.prev === nodeD)
