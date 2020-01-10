@@ -216,6 +216,26 @@ class DoublyLinkedList {
 		}
 		return this
 	}
+	reverse(){
+		this.breakCircular()
+
+		let node = this.head
+		let processed = null
+		while(node){
+			let origList = node.next
+
+			node.next = processed
+			node.prev = origList
+
+			processed = node
+			node = origList
+		}
+		let temp = this.head
+		this.head = this.tail
+		this.tail = temp
+
+		return this
+	}
 }
 
 module.exports = DoublyLinkedList

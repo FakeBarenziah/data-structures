@@ -2,11 +2,11 @@ const DoublyLinkedList = require('./doublyLinkedList.js')
 
 const list = new DoublyLinkedList()
 
-list.push(10)
-
-console.log("\n ------Testing!------ \n")
+console.log("\n ------Testing------ \n")
 
 console.log("\n Push/Pop: \n")
+
+list.push(10)
 
 console.log("List: ", list.show())
 console.log("Nodes head and tail match when one node is in the list: ", list.head === list.tail)
@@ -156,5 +156,12 @@ list.removeAll(9)
 list.removeAll(5)
 list.removeAll(19)
 
-console.log(list.show())
+console.log(`List length: ${list.length}, head: ${list.head}`)
 console.log("Can be used to empty the list: ", list.length === 0 && list.head === null && list.tail === null)
+
+console.log("\n Reversal: \n")
+
+seedList(list)
+console.log(list.show())
+list.reverse()
+console.log(list.show())
