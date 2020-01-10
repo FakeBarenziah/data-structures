@@ -138,5 +138,23 @@ console.log("\n Remove All \n")
 console.log(list.show())
 list.removeAll(8)
 console.log(list.show())
+
 console.log("Removes all instances of the passed value: ", list.search(8) === null)
 console.log("Decrements the length: ", list.length === 10)
+
+list.removeAll(4)
+list.removeAll(6)
+list.removeAll(1)
+list.removeAll(3)
+
+console.log(list.show())
+
+console.log("Removes all the instances of multiple removed values", list.search(4) === null && list.search(6) === null && list.search(1) === null && list.search(3) === null)
+
+list.removeAll(7)
+list.removeAll(9)
+list.removeAll(5)
+list.removeAll(19)
+
+console.log(list.show())
+console.log("Can be used to empty the list: ", list.length === 0 && list.head === null && list.tail === null)

@@ -209,7 +209,7 @@ class DoublyLinkedList {
 	removeAll(value){
 		let currentNode = this.head
 		let idx = 0
-		while(idx < this.length - 1){
+		while(idx < this.length){
 			if(currentNode.value === value) {
 				this.delete(idx)
 				idx--
