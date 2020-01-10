@@ -148,6 +148,16 @@ class DoublyLinkedList {
 			if(fast === slow) return true
 		}
 	}
+	search(value){
+		let currentNode = this.head
+		let counter = 0
+		while(counter < this.length){
+			if(currentNode.value === value) return currentNode
+			currentNode = currentNode.next
+			counter++
+		}
+		return currentNode
+	}
 }
 
 module.exports = DoublyLinkedList

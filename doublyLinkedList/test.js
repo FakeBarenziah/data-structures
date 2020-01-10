@@ -73,3 +73,10 @@ console.log("Nodes head and tail point to one another: ", list.head.prev === lis
 list.breakCircular()
 console.log("breakCircular returns the list to a linear, non-circular state: ", list.head.prev === null && list.tail.next === null)
 console.log(list.show())
+
+console.log("\n Search: \n")
+
+seedList(list)
+
+console.log("Finds the first instance of a node with the given value, starting from the head: ", list.search(1) === list.getAtIndex(7))
+console.log("Returns null for values not in the list: ", list.search(-1) === null)
