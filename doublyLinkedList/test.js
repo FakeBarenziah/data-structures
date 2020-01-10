@@ -72,6 +72,19 @@ console.log(list.show())
 console.log("Passing an invalid index to delete does not change the length or list: ", list.delete(-2).length === 10)
 console.log(list.show())
 
+const origHead = list.head
+const origTail = list.tail
+
+list.delete(0)
+list.delete(list.length-1)
+
+const newHead = list.head
+const newTail = list.tail
+
+console.log("Can delete the first or the last item from the list successfully and reassign head/tail: ", origHead !== newHead, origTail !== newTail)
+
+console.log(list.show())
+
 seedList(list)
 
 console.log("\n Error Handling when length is modified improperly \n")
@@ -106,8 +119,8 @@ console.log(list.show())
 
 console.log("insertAfter inserts a node with a value after the passed node: ", nodeA.next.value === 8, nodeB.prev.value === 8)
 console.log("insertAfter increases the length correctly: ", list.length === 11)
-console.log("Nodes A -> C -> B next pointers are correct: ", nodeA.next === nodeC, nodeC.next === nodeB)
-console.log("Nodes B -> C -> A prev pointers are correct: ", nodeB.prev === nodeC, nodeC.prev === nodeA)
+console.log("Nodes' next pointers are correct: ", nodeA.next === nodeC, nodeC.next === nodeB)
+console.log("Nodes' prev pointers are correct: ", nodeB.prev === nodeC, nodeC.prev === nodeA)
 
 const nodeF = list.getAtIndex(8)
 const nodeD = nodeF.prev
@@ -119,3 +132,11 @@ console.log("insertBefore inserts a node with a value before the passed node: ",
 console.log("insertBefore increases the length correctly: ", list.length === 12)
 console.log("Nodes' next pointers are correct: ", nodeD.next === nodeE, nodeE.next === nodeF)
 console.log("Nodes' prev pointers are correct: ", nodeF.prev === nodeE, nodeE.prev === nodeD)
+
+console.log("\n Remove All \n")
+
+console.log(list.show())
+list.removeAll(8)
+console.log(list.show())
+console.log("Removes all instances of the passed value: ", list.search(8) === null)
+console.log("Decrements the length: ", list.length === 10)

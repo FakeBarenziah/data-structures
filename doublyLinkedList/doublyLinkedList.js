@@ -135,11 +135,15 @@ class DoublyLinkedList {
 	delete(idx){
 		if(this.indexValid(idx) === false) return this
 
+		const thisNode = this.getAtIndex(idx)
 		const prevNode = this.getAtIndex(idx - 1)
 		const nextNode = this.getAtIndex(idx + 1)
 
 		if(prevNode) prevNode.next = nextNode
 		if(nextNode) nextNode.prev = prevNode
+
+		if(thisNode === this.head) this.head = nextNode
+		if(thisNode === this.tail) this.tail = prevNode
 
 		this.length--
 		return this
@@ -200,6 +204,19 @@ class DoublyLinkedList {
 		node.next = newNode
 
 		this.length++
+		return this
+	}
+	removeAll(value){
+		let currentNode = this.head
+		let idx = 0
+		while(idx < this.length - 1){
+			if(currentNode.value === value) {
+				this.delete(idx)
+				idx--
+			}
+			currentNode = currentNode.next
+			idx++
+		}
 		return this
 	}
 }
