@@ -63,6 +63,24 @@ class DoublyLinkedList {
 		listStatement += this.loop() ? "circular" : "null"
 		return listStatement
 	}
+	showReverse(){
+		if(!this.tail) return null
+
+		let counter = 0
+		let activeNode = this.tail
+		let listStatement = ""
+
+		while(counter < this.length){
+			listStatement += `${activeNode.value} -> `
+			activeNode = activeNode.prev
+			counter++
+		}
+
+		if(activeNode && !this.loop()) this.notAllNodesShownError()
+
+		listStatement += this.loop() ? "circular" : "null"
+		return listStatement
+	}
 	indexValid(idx){
 		idx = Math.floor(idx)
 		if(idx < 0 || idx > this.length - 1) return false
@@ -217,10 +235,12 @@ class DoublyLinkedList {
 		return this
 	}
 	reverse(){
-		this.breakCircular()
+		let circular = this.head.prev === this.tail
+		if(circular) this.breakCircular()
 
 		let node = this.head
 		let processed = null
+
 		while(node){
 			let origList = node.next
 
@@ -230,9 +250,12 @@ class DoublyLinkedList {
 			processed = node
 			node = origList
 		}
+
 		let temp = this.head
 		this.head = this.tail
 		this.tail = temp
+
+		if(circular) this.makeCircular()
 
 		return this
 	}

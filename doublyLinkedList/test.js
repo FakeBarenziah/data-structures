@@ -163,5 +163,14 @@ console.log("\n Reversal: \n")
 
 seedList(list)
 console.log(list.show())
+const firstListElementBeforeReversal = list.getAtIndex(0).value
 list.reverse()
 console.log(list.show())
+const lastListElementAfterReversal = list.getAtIndex(list.length - 1).value
+
+console.log("Reverses a normal list: ", firstListElementBeforeReversal === lastListElementAfterReversal)
+
+const beforeReversingCircularList = list.makeCircular().show()
+const afterReversingCircularList = list.reverse().showReverse()
+
+console.log("Correctly reverses a circular list: ", beforeReversingCircularList === afterReversingCircularList)
