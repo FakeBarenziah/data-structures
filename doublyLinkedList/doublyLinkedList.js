@@ -210,12 +210,9 @@ class DoublyLinkedList {
 		let currentNode = this.head
 		let idx = 0
 		while(idx < this.length){
-			if(currentNode.value === value) {
-				this.delete(idx)
-				idx--
-			}
+			if(currentNode.value === value) this.delete(idx)
+			else idx++
 			currentNode = currentNode.next
-			idx++
 		}
 		return this
 	}
