@@ -45,34 +45,21 @@ class DoublyLinkedList {
 		this.length--
 		return removeNode
 	}
-	show(){
-		if(!this.head) return null
-
-		let counter = 0
-		let activeNode = this.head
-		let listStatement = ""
-
-		while(counter < this.length){
-			listStatement += `${activeNode.value} -> `
-			activeNode = activeNode.next
-			counter++
+	show(tailFirst = false){
+		const orientation = {
+			start: tailFirst ? this.tail : this.head,
+			direction: tailFirst ? "prev" : "next"
 		}
 
-		if(activeNode && !this.loop()) this.notAllNodesShownError()
-
-		listStatement += this.loop() ? "circular" : "null"
-		return listStatement
-	}
-	showReverse(){
-		if(!this.tail) return null
+		if(!orientation.start) return null
 
 		let counter = 0
-		let activeNode = this.tail
+		let activeNode = orientation.start
 		let listStatement = ""
 
 		while(counter < this.length){
 			listStatement += `${activeNode.value} -> `
-			activeNode = activeNode.prev
+			activeNode = activeNode[orientation.direction]
 			counter++
 		}
 

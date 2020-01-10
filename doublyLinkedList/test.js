@@ -171,6 +171,6 @@ const lastListElementAfterReversal = list.getAtIndex(list.length - 1).value
 console.log("Reverses a normal list: ", firstListElementBeforeReversal === lastListElementAfterReversal)
 
 const beforeReversingCircularList = list.makeCircular().show()
-const afterReversingCircularList = list.reverse().showReverse()
+const afterReversingCircularList = list.reverse().show(true)
 
 console.log("Correctly reverses a circular list: ", beforeReversingCircularList === afterReversingCircularList)
