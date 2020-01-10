@@ -174,3 +174,22 @@ const beforeReversingCircularList = list.makeCircular().show()
 const afterReversingCircularList = list.reverse().show(true)
 
 console.log("Correctly reverses a circular list: ", beforeReversingCircularList === afterReversingCircularList)
+
+console.log("\n Map \n")
+seedList(list)
+
+const originalThirdValue = list.getAtIndex(3).value
+
+const doubledList = list.map(e => e*2)
+
+console.log("Map does not modify the list it is called on: ", originalThirdValue === list.getAtIndex(3).value)
+console.log("Map executes a callback function on every list element: ", doubledList.getAtIndex(0).value === list.getAtIndex(0).value * 2, doubledList.getAtIndex(4).value === list.getAtIndex(4).value * 2, doubledList.getAtIndex(list.length-1).value === list.getAtIndex(list.length-1).value * 2)
+console.log(doubledList.show())
+console.log("Map returns a list of the same length: ", doubledList.length === list.length)
+
+list.makeCircular()
+const tripledList = list.map(e => e*3)
+
+console.log("Map works on a circluar list: ", tripledList.getAtIndex(0).value === list.getAtIndex(0).value * 3, tripledList.getAtIndex(6).value === list.getAtIndex(6).value * 3, tripledList.getAtIndex(list.length - 1).value === list.getAtIndex(list.length - 1).value * 3)
+console.log("Map returns a circular list if called on one: ", tripledList.tail.next === tripledList.head, tripledList.head.prev === tripledList.tail)
+console.log("New circular list has the correct length: ", list.length === tripledList.length)

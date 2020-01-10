@@ -246,6 +246,22 @@ class DoublyLinkedList {
 
 		return this
 	}
+	map(func){
+		const newList = new DoublyLinkedList()
+
+		let currentNode = this.head
+		let counter = 0
+
+		while(counter < this.length) {
+			newList.push(func(currentNode.value))
+			currentNode = currentNode.next
+			counter++
+		}
+
+		if(currentNode === this.head) newList.makeCircular()
+
+		return newList
+	}
 }
 
 module.exports = DoublyLinkedList
