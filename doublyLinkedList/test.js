@@ -4,15 +4,37 @@ const list = new DoublyLinkedList()
 
 console.log("\n ------Testing------ \n")
 
+const assertionFails = []
+
 console.log("\n Push/Pop: \n")
 
 list.push(10)
-
 console.log("List: ", list.show())
-console.log("Nodes head and tail match when one node is in the list: ", list.head === list.tail)
-console.log("pop returns the element in a list with length of 1: ", list.pop().value === 10)
-console.log("List has null head and tail after removing its only node: ", list.head===null && list.tail===null)
-console.log("List has length 0 after removing its only node: ", list.length === 0)
+
+const pushPopDescs = [
+	"Nodes head and tail match when one node is in the list: ",
+	"pop returns the element in a list with length of 1: ",
+	"List has null head and tail after removing its only node: ",
+	"List has length 0 after removing its only node: "
+]
+const pushPopAssertions = [
+	list.head === list.tail,
+	list.pop().value === 10,
+	list.head===null && list.tail===null,
+	list.length === 0
+]
+
+pushPopAssertions.forEach((each, idx) => {
+	if(!each){
+		assertionFails.push(pushPopDescs[idx])
+		assertionFails.push(pushPopAssertions[idx])
+	}
+})
+
+console.log(pushPopDescs[0], pushPopAssertions[0])
+console.log(pushPopDescs[1], pushPopAssertions[1])
+console.log(pushPopDescs[2], pushPopAssertions[2])
+console.log(pushPopDescs[3], pushPopAssertions[3])
 console.log("List: ", list.show())
 
 const pushVals = [4,8,6,7,9,5,3,1,6,3]
@@ -23,10 +45,32 @@ function seedList(dll){
 }
 
 seedList(list)
+
+const pushPopSeededAssertions = [
+	list.tail.value === list.pop().value,
+	list.tail.value !== 3,
+	list.length < 10
+]
+
+const pushPopSeededDescs = [
+	"pop returns the last element in a list with multiple elements: ",
+	"tail element is different than it was before: ",
+	"Length is reduced after popping: "
+]
+
+pushPopSeededAssertions.forEach((each, idx) => {
+	if(!each){
+		assertionFails.push(pushPopSeededDescs[idx])
+		assertionFails.push(pushPopSeededAssertions[idx])
+	}
+})
+
 console.log("Longer list: ", list.show())
-console.log("pop returns the last element in a list with multiple elements: ", list.tail.value === list.pop().value)
-console.log("tail element is different than it was before: ", list.tail.value !== 3)
-console.log("Length is reduced after popping: ", list.length < 10)
+console.log(pushPopSeededDescs[0], pushPopSeededAssertions[0])
+console.log(pushPopSeededDescs[1], pushPopSeededAssertions[1])
+console.log(pushPopSeededDescs[2], pushPopSeededAssertions[2])
+
+
 
 console.log("\n Shift/Unshift: \n")
 console.log(list.show())
@@ -82,6 +126,17 @@ const newHead = list.head
 const newTail = list.tail
 
 console.log("Can delete the first or the last item from the list successfully and reassign head/tail: ", origHead !== newHead, origTail !== newTail)
+
+console.log(list.show())
+
+list.clear()
+list.push(18)
+
+console.log(list.show())
+
+list.delete(0)
+
+console.log("Successfully deletes the last item in the list: ", list.search(18)===null, list.head===null, list.tail===null, list.length===0 )
 
 console.log(list.show())
 
@@ -233,3 +288,5 @@ const multiplier = (each, acc) => each * acc
 const bigNum = list.reduce(multiplier)
 
 console.log("Reduce works correctly when the list is circular: ", bigNum === 3265920)
+console.log("\n")
+console.log("reduceRight combines the list nodes into one value from tail to head: ", list.reduceRight(strCb) === "3613597684")

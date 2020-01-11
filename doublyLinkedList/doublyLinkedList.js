@@ -279,8 +279,6 @@ class DoublyLinkedList {
 		return newList
 	}
 	reduce(func, init){
-		const newList = new DoublyLinkedList()
-
 		let currentNode = this.head
 		let counter = 0
 
@@ -293,6 +291,24 @@ class DoublyLinkedList {
 		while(counter < this.length){
 			init = func(currentNode.value, init)
 			currentNode = currentNode.next
+			counter++
+		}
+
+		return init
+	}
+	reduceRight(func, init){
+		let currentNode = this.tail
+		let counter = 0
+
+		if(init === undefined){
+			init = currentNode.value
+			currentNode = currentNode.prev
+			counter++
+		}
+
+		while(counter < this.length){
+			init = func(currentNode.value, init)
+			currentNode = currentNode.prev
 			counter++
 		}
 
